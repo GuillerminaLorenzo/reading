@@ -17,6 +17,26 @@ export default class App extends Component {
           onNavigationStateChange = {this.onNavigationStateChange}
         />
 
+        <View 
+          style = {{position:'absolute', bottom:0, width:'100%',
+            height:80, backgroundColor:'#886', justifyContent:'center', 
+            alignItems:'center', flexDirection:'row'}}>
+          <TouchableOpacity
+            style = {{marginRight:10}}>
+            <Text 
+              style = {{color:'#fff', fontSize:16, fontWeight:'bold'}}>
+              Prev
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style = {{marginLeft:10}}>
+            <Text style = {{color:'#fff', fontSize:16, fontWeight:'bold'}}>
+              Next
+            </Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
     )
   }
