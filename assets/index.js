@@ -1,2 +1,3 @@
 window.addEventListener("message", message => {
-    alert(message.data)});
+  window.ReactNativeWebView.postMessage(`${message.data}`);
+});
