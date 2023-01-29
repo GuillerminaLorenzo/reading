@@ -8,6 +8,10 @@ export default class App extends Component {
     console.log('navState', navState)
   }
 
+  goBack = () => {
+    this.refs.webview.goBack()
+  }
+
   render() {
     return (
       <View style = {{flex:1}}>
@@ -22,6 +26,7 @@ export default class App extends Component {
             height:80, backgroundColor:'#886', justifyContent:'center', 
             alignItems:'center', flexDirection:'row'}}>
           <TouchableOpacity
+            onPress={this.goBack}
             style = {{marginRight:10}}>
             <Text 
               style = {{color:'#fff', fontSize:16, fontWeight:'bold'}}>
