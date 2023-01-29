@@ -10,8 +10,12 @@ const App = () => {
   const webview = useRef();
 
   function onMessage(data) {
-    alert(data.nativeEvent.data);
-  }
+    if (data.nativeEvent.data === 'goback'){
+      console.log('prev works');
+    } else {
+      console.log('next works')
+    }
+   } 
 
   function goBack() {
     webview.current.postMessage('goback');
