@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
-import html from './index.html';
 
-class MyInlineWeb extends Component {
+export default class App extends Component {
+
+  onNavigationStateChange = (navState) => {
+    console.log('navState', navState)
+  }
+
   render() {
     return (
-      <WebView
-        style={{flex: 1}}
-        originWhitelist={['*']}
-        source={html}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        
-      />
-    );
+      <View style = {{flex:1}}>
+        <WebView
+          source={{uri: 'https://www.google.com/'}} 
+          ref = {'webview'}
+          onNavigationStateChange = {this.onNavigationStateChange}
+        />
+
+      </View>
+    )
   }
 }
-
-export default MyInlineWeb;
