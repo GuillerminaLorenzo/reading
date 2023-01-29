@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 import html from './index.html'
+import styles from "./styles.js";
 
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
   }
 
   return (
-    <View style = {{flex:1}}>
+    <View style = {styles.container}>
       <WebView
         source={html}
         ref = {webview}
@@ -29,22 +30,20 @@ const App = () => {
       />
 
       <View 
-        style = {{position:'absolute', bottom:0, width:'100%',
-          height:80, backgroundColor:'#886', justifyContent:'center', 
-          alignItems:'center', flexDirection:'row'}}>
+        style = {styles.touchableOpacityContainer}>
         <TouchableOpacity
           onPress={() => goBack()}
-          style = {{marginRight:10}}>
+          style = {styles.touchableOpacityRight}>
           <Text 
-            style = {{color:'#fff', fontSize:16, fontWeight:'bold'}}>
+            style = {styles.touchableOpacityText}>
             Prev
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => onNext()}
-          style = {{marginLeft:10}}>
-          <Text style = {{color:'#fff', fontSize:16, fontWeight:'bold'}}>
+          style = {styles.touchableOpacityLeft}>
+          <Text style = {styles.touchableOpacityText}>
             Next
           </Text>
         </TouchableOpacity>
