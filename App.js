@@ -1,28 +1,50 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-export default class App extends Component {
 
-  onNavigationStateChange = (navState) => {
-    console.log('navState', navState)
+const App = () => {
+
+  const webview = useRef();
+
+  function onMessage(data) {
+    alert(data.nativeEvent.data);
   }
 
-  goBack = () => {
-    this.refs.webview.goBack()
+  function goBack() {
+    webview.current.postMessage('goback');
   }
-
-  onNext = () => {
-    this.refs.webview.goForward()
+  function onNext() {
+    webview.current.postMessage('onnext');
   }
-
-  render() {
     return (
       <View style = {{flex:1}}>
         <WebView
-          source={{uri: 'https://www.google.com/'}} 
-          ref = {'webview'}
-          onNavigationStateChange = {this.onNavigationStateChange}
+          source={{html: ` 
+          <html>
+          <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+          </head>
+          <body
+            style="
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+            <script>
+              window.addEventListener("message", message => {
+                alert(message.data) 
+              });
+            </script>
+          </body>
+        </html>        
+`,}} 
+          ref = {webview}
+          onMessage={onMessage}
+          
+
         />
 
         <View 
@@ -30,7 +52,7 @@ export default class App extends Component {
             height:80, backgroundColor:'#886', justifyContent:'center', 
             alignItems:'center', flexDirection:'row'}}>
           <TouchableOpacity
-            onPress={this.goBack}
+            onPress={() => goBack()}
             style = {{marginRight:10}}>
             <Text 
               style = {{color:'#fff', fontSize:16, fontWeight:'bold'}}>
@@ -39,7 +61,7 @@ export default class App extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={this.onNext}
+            onPress={() => onNext()}
             style = {{marginLeft:10}}>
             <Text style = {{color:'#fff', fontSize:16, fontWeight:'bold'}}>
               Next
@@ -50,4 +72,5 @@ export default class App extends Component {
       </View>
     )
   }
-}
+
+  export default App;
