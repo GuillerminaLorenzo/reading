@@ -12,6 +12,10 @@ export default class App extends Component {
     this.refs.webview.goBack()
   }
 
+  onNext = () => {
+    this.refs.webview.goForward()
+  }
+
   render() {
     return (
       <View style = {{flex:1}}>
@@ -35,6 +39,7 @@ export default class App extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity
+            onPress={this.onNext}
             style = {{marginLeft:10}}>
             <Text style = {{color:'#fff', fontSize:16, fontWeight:'bold'}}>
               Next
