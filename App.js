@@ -18,7 +18,7 @@ const App = () => {
         window.scrollTo(0, ${pageHeading[currentHeading + 1].top});
       `);
     } 
-    handleNextPressLastHeading()
+    handleNextPressLastHeading();
   };
 
   const handleNextPressLastHeading = () => {
@@ -33,12 +33,21 @@ const App = () => {
   const handlePrevPress = () => {
     if (currentHeading > 0) {
       setCurrentHeading(currentHeading - 1);
-      console.log(pageHeading[currentHeading - 1].top)
       webviewRef.current.injectJavaScript(`
         window.scrollTo(0, ${pageHeading[currentHeading - 1].top});
       `);
     }
+    handlePrevPressLastHeading();
   };
+
+  const handlePrevPressLastHeading = () => {
+    if (currentHeading === 0){
+      setCurrentHeading(pageHeading.length - 1);
+      webviewRef.current.injectJavaScript(`
+        window.scrollTo(0, ${pageHeading[pageHeading.length - 1].top});
+      `);  
+    }
+  }
 
   function onMessage(event) {
     if (event.nativeEvent.data === 'goback'){
