@@ -14,12 +14,21 @@ const App = () => {
   const handleNextPress = () => {
     if (currentHeading < pageHeading.length - 1) {
       setCurrentHeading(currentHeading + 1);
-     console.log(pageHeading[currentHeading + 1].top)
       webviewRef.current.injectJavaScript(`
         window.scrollTo(0, ${pageHeading[currentHeading + 1].top});
       `);
-    }
+    } 
+    handleNextPressLastHeading()
   };
+
+  const handleNextPressLastHeading = () => {
+    if (currentHeading === pageHeading.length - 1) {
+      setCurrentHeading(0);
+      webviewRef.current.injectJavaScript(`
+        window.scrollTo(0, ${pageHeading[0].top});
+      `);
+    } 
+  }
 
   const handlePrevPress = () => {
     if (currentHeading > 0) {
