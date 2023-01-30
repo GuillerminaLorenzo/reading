@@ -1,36 +1,69 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 import html from './index.html'
 import styles from "./styles.js";
 
-
 const App = () => {
 
-  const webview = useRef();
+  const webviewRef = useRef();
 
-  function onMessage(data) {
-    if (data.nativeEvent.data === 'goback'){
+  const [currentHeading, setCurrentHeading] = useState(0);
+  const [pageHeading, setPageHeading] = useState(0);
+
+  const handleNextPress = () => {
+    if (currentHeading < pageHeading.length - 1) {
+      setCurrentHeading(currentHeading + 1);
+      webviewRef.current.injectJavaScript(`
+        window.scrollTo(0, ${pageHeading[currentHeading + 1].top});
+      `);
+    }
+  };
+
+  const handlePrevPress = () => {
+    if (currentHeading > 0) {
+      setCurrentHeading(currentHeading - 1);
+      webviewRef.current.injectJavaScript(`
+        window.scrollTo(0, ${pageHeading[currentHeading - 1].top});
+      `);
+    }
+  };
+
+  function onMessage(event) {
+    if (event.nativeEvent.data === 'goback'){
       console.log('prev works');
-    } else {
+      handlePrevPress();
+    } else if (event.nativeEvent.data === 'onnext') {
       console.log('next works')
+      handleNextPress();
+    } else {
+      console.log(event.nativeEvent.data.split(',').length)
+      setPageHeading(event.nativeEvent.data.split(','));
     }
    } 
 
   function goBack() {
-    webview.current.postMessage('goback');
+    webviewRef.current.postMessage('goback');
   }
 
   function onNext() {
-    webview.current.postMessage('onnext');
+    webviewRef.current.postMessage('onnext');
   }
+
+  const injectedjs = `const headings = JSON.stringify(Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(heading => ({
+      top: heading.offsetTop
+    })));
+    window.ReactNativeWebView.postMessage(headings);
+  `
 
   return (
     <View style = {styles.container}>
       <WebView
         source={html}
-        ref = {webview}
+        ref = {webviewRef}
         onMessage={onMessage}
+        javaScriptEnabled={true}
+        injectedJavaScript={injectedjs}
       />
 
       <View 
