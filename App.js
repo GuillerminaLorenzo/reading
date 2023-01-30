@@ -14,6 +14,7 @@ const App = () => {
   const handleNextPress = () => {
     if (currentHeading < pageHeading.length - 1) {
       setCurrentHeading(currentHeading + 1);
+     console.log(pageHeading[currentHeading + 1].top)
       webviewRef.current.injectJavaScript(`
         window.scrollTo(0, ${pageHeading[currentHeading + 1].top});
       `);
@@ -23,6 +24,7 @@ const App = () => {
   const handlePrevPress = () => {
     if (currentHeading > 0) {
       setCurrentHeading(currentHeading - 1);
+      console.log(pageHeading[currentHeading - 1].top)
       webviewRef.current.injectJavaScript(`
         window.scrollTo(0, ${pageHeading[currentHeading - 1].top});
       `);
@@ -37,8 +39,8 @@ const App = () => {
       console.log('next works')
       handleNextPress();
     } else {
-      console.log(event.nativeEvent.data.split(',').length)
-      setPageHeading(event.nativeEvent.data.split(','));
+      console.log(JSON.parse(event.nativeEvent.data.split(',')))
+      setPageHeading(JSON.parse(event.nativeEvent.data.split(',')));
     }
    } 
 
@@ -54,6 +56,7 @@ const App = () => {
       top: heading.offsetTop
     })));
     window.ReactNativeWebView.postMessage(headings);
+    true;
   `
 
   return (
@@ -64,6 +67,7 @@ const App = () => {
         onMessage={onMessage}
         javaScriptEnabled={true}
         injectedJavaScript={injectedjs}
+        scrollEnabled={true}
       />
 
       <View 
