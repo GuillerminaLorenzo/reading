@@ -11,8 +11,6 @@ const PrevButton = ({webviewRef, currentHeading, pageHeading}) => {
   const handlePrevPress = () => {
     if (newCurrentHeading > 0) {
       setNewCurrentHeading(prevHeading);
-      console.log(newCurrentHeading)
-      console.log(pageHeading[prevHeading].top)
       scrollToHeadings(pageHeading[prevHeading].top);
     }
     handlePrevPressLastHeading();
@@ -36,10 +34,7 @@ const PrevButton = ({webviewRef, currentHeading, pageHeading}) => {
       style={styles.touchableOpacityRight}
       onPress={() => handlePrevPress()}
     >
-      <Text 
-      style={styles.touchableOpacityText}>
-      Prev
-      </Text>
+      <Text style={styles.touchableOpacityText}>Prev</Text>
     </TouchableOpacity>
   );
 };
