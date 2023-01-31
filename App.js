@@ -11,41 +11,46 @@ const App = () => {
   const [currentHeading, setCurrentHeading] = useState(0);
   const [pageHeading, setPageHeading] = useState(0);
 
+  const secondToLastHeading = pageHeading.length - 1;
+  const nextHeading = currentHeading + 1;
+  const prevHeading = currentHeading - 1;
+  const firstHeading = pageHeading[0];
+
   const handleNextPress = () => {
-    if (currentHeading < pageHeading.length - 1) {
-      setCurrentHeading(currentHeading + 1);
-      scrollToHeadings(pageHeading[currentHeading + 1].top)
+    if (currentHeading < secondToLastHeading) {
+      setCurrentHeading(nextHeading);
+      scrollToHeadings(pageHeading[nextHeading].top);
     } 
     handleNextPressLastHeading();
   };
 
   const handleNextPressLastHeading = () => {
-    if (currentHeading === pageHeading.length - 1) {
+    if (currentHeading === secondToLastHeading) {
       setCurrentHeading(0);
-      scrollToHeadings(pageHeading[0].top)
+      scrollToHeadings(firstHeading.top);
     } 
-  }
+  };
 
   const handlePrevPress = () => {
     if (currentHeading > 0) {
-      setCurrentHeading(currentHeading - 1);
-      scrollToHeadings(pageHeading[currentHeading - 1].top)
+      setCurrentHeading(prevHeading);
+      scrollToHeadings(pageHeading[prevHeading].top);
     }
     handlePrevPressLastHeading();
   };
 
   const handlePrevPressLastHeading = () => {
     if (currentHeading === 0){
-      setCurrentHeading(pageHeading.length - 1);
-      scrollToHeadings(pageHeading[pageHeading.length - 1].top)
+      setCurrentHeading(secondToLastHeading);
+      scrollToHeadings(pageHeading[secondToLastHeading].top);
     }
-  }
+  };
 
   const scrollToHeadings = (heading) => {
     webviewRef.current.injectJavaScript(`
       window.scrollTo(0, ${heading});
     `); 
-  }
+  };
 
   function onMessage(event) {
     const data = event.nativeEvent.data;
@@ -56,15 +61,15 @@ const App = () => {
     } else {
       setPageHeading(JSON.parse(data.split(',')));
     }
-   } 
+   };
 
   function goBack() {
     webviewRef.current.postMessage('goback');
-  }
+  };
 
   function onNext() {
     webviewRef.current.postMessage('onnext');
-  }
+  };
 
   const injectedjs = `const headings = JSON.stringify(Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(heading => ({
       top: heading.offsetTop
