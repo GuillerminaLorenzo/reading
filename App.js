@@ -54,13 +54,9 @@ const App = () => {
 
   function onMessage(event) {
     const data = event.nativeEvent.data;
-    if (data === 'goback'){
-      handlePrevPress();
-    } else if (data === 'onnext') {
-      handleNextPress();
-    } else {
-      setPageHeading(JSON.parse(data.split(',')));
-    }
+    (data === 'goback') ? handlePrevPress()
+      : (data === 'onnext') ? handleNextPress()
+      : setPageHeading(JSON.parse(data.split(',')))
    };
 
   function goBack() {
