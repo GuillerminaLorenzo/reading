@@ -12,8 +12,6 @@ const NextButton = ({webviewRef, currentHeading, pageHeading}) => {
   const handleNextPress = () => {
     if (newCurrentHeading < secondToLastHeading) {
       setNewCurrentHeading(nextHeading);
-      console.log(newCurrentHeading)
-      console.log(pageHeading[nextHeading].top)
       scrollToHeadings(pageHeading[nextHeading].top)
     } 
     handleNextPressLastHeading();
@@ -30,6 +28,7 @@ const NextButton = ({webviewRef, currentHeading, pageHeading}) => {
     webviewRef.current.injectJavaScript(`
       window.scrollTo(0, ${heading});
     `); 
+    console.log(webviewRef)
   };
 
   return (

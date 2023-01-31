@@ -15,7 +15,6 @@ const App = () => {
 
   const onMessage = (event) => {
     const data = event.nativeEvent.data;
-    console.log(data);
     setPageHeading(JSON.parse(data.split(',')))
   };
 
