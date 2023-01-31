@@ -80,6 +80,7 @@ const App = () => {
   return (
     <View style = {styles.container}>
       <WebView
+        style = {styles.webview}
         source={html}
         ref = {webviewRef}
         onMessage={onMessage}
