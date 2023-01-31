@@ -12,9 +12,15 @@ describe('App', () => {
     it('has 2 children', () => {
         const tree = render.create(<App />).toJSON();
         expect(tree.children.length).toBe(2);
+        expect(tree.children).toMatchSnapshot();
+
+        // children[0] tests
         expect(tree.children[0].type).toEqual('View');
         expect(tree.children[0].children[0].type).toEqual('RNCWebView');
-        expect(tree.children[0].type).toMatchSnapshot();
+        
+        // children[1] tests
+        expect(tree.children[1].type).toEqual('View');
+        expect(tree.children[1].children.length).toBe(2);
     });
 
     // onMessage tests
