@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 import html from './index.html'
-import styles from "./styles.js";
+import styles from "./Styles.js";
 
 const App = () => {
 
