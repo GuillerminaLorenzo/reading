@@ -27,8 +27,7 @@ const NextButton = ({webviewRef, currentHeading, pageHeading}) => {
   const scrollToHeadings = (heading) => {
     webviewRef.current.injectJavaScript(`
       window.scrollTo(0, ${heading});
-    `); 
-    console.log(webviewRef)
+    `);
   };
 
   return (
