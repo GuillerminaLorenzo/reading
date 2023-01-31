@@ -14,9 +14,7 @@ const App = () => {
   const handleNextPress = () => {
     if (currentHeading < pageHeading.length - 1) {
       setCurrentHeading(currentHeading + 1);
-      webviewRef.current.injectJavaScript(`
-        window.scrollTo(0, ${pageHeading[currentHeading + 1].top});
-      `);
+      scrollToHeadings(pageHeading[currentHeading + 1].top)
     } 
     handleNextPressLastHeading();
   };
@@ -24,18 +22,14 @@ const App = () => {
   const handleNextPressLastHeading = () => {
     if (currentHeading === pageHeading.length - 1) {
       setCurrentHeading(0);
-      webviewRef.current.injectJavaScript(`
-        window.scrollTo(0, ${pageHeading[0].top});
-      `);
+      scrollToHeadings(pageHeading[0].top)
     } 
   }
 
   const handlePrevPress = () => {
     if (currentHeading > 0) {
       setCurrentHeading(currentHeading - 1);
-      webviewRef.current.injectJavaScript(`
-        window.scrollTo(0, ${pageHeading[currentHeading - 1].top});
-      `);
+      scrollToHeadings(pageHeading[currentHeading - 1].top)
     }
     handlePrevPressLastHeading();
   };
@@ -43,22 +37,24 @@ const App = () => {
   const handlePrevPressLastHeading = () => {
     if (currentHeading === 0){
       setCurrentHeading(pageHeading.length - 1);
-      webviewRef.current.injectJavaScript(`
-        window.scrollTo(0, ${pageHeading[pageHeading.length - 1].top});
-      `);  
+      scrollToHeadings(pageHeading[pageHeading.length - 1].top)
     }
   }
 
+  const scrollToHeadings = (heading) => {
+    webviewRef.current.injectJavaScript(`
+      window.scrollTo(0, ${heading});
+    `); 
+  }
+
   function onMessage(event) {
-    if (event.nativeEvent.data === 'goback'){
-      console.log('prev works');
+    const data = event.nativeEvent.data;
+    if (data === 'goback'){
       handlePrevPress();
-    } else if (event.nativeEvent.data === 'onnext') {
-      console.log('next works')
+    } else if (data === 'onnext') {
       handleNextPress();
     } else {
-      console.log(JSON.parse(event.nativeEvent.data.split(',')))
-      setPageHeading(JSON.parse(event.nativeEvent.data.split(',')));
+      setPageHeading(JSON.parse(data.split(',')));
     }
    } 
 
@@ -74,7 +70,6 @@ const App = () => {
       top: heading.offsetTop
     })));
     window.ReactNativeWebView.postMessage(headings);
-    true;
   `
 
   return (
@@ -86,7 +81,6 @@ const App = () => {
         onMessage={onMessage}
         javaScriptEnabled={true}
         injectedJavaScript={injectedjs}
-        scrollEnabled={true}
       />
 
       <View 
