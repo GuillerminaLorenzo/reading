@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import styles from "./Styles.js";
+import styles from "../style/Styles";
 
-const PrevButton = ({webviewRef, pageHeading}) => {
-  const [newCurrentHeading, setNewCurrentHeading] = useState(0);
+const PrevButton = ({webviewRef, currentHeading, pageHeading}) => {
+  const [newCurrentHeading, setNewCurrentHeading] = useState(currentHeading);
 
   const secondToLastHeading = pageHeading.length - 1;
   const prevHeading = newCurrentHeading - 1;
@@ -11,7 +11,8 @@ const PrevButton = ({webviewRef, pageHeading}) => {
   const handlePrevPress = () => {
     if (newCurrentHeading > 0) {
       setNewCurrentHeading(prevHeading);
-      console.log(prevHeading)
+      console.log(newCurrentHeading)
+      console.log(pageHeading[prevHeading].top)
       scrollToHeadings(pageHeading[prevHeading].top);
     }
     handlePrevPressLastHeading();
