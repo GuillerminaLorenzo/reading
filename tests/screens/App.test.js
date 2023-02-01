@@ -1,6 +1,6 @@
 import React from 'react';
 import render from 'react-test-renderer';
-import App from '../../../scr/screens/App';
+import App from '../../scr/screens/App';
 
 
 describe('App', () => {
