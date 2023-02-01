@@ -34,6 +34,7 @@ const NextButton = ({webviewRef, currentHeading, pageHeading}) => {
     <TouchableOpacity
       style={styles.touchableOpacityLeft}
       onPress={() => handleNextPress()}
+      testID={'next'} 
     >
       <Text style={styles.touchableOpacityText}>Next</Text>
     </TouchableOpacity>
