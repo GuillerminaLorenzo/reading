@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import html from '../../index.html'
 import styles from "../components/style/Styles";
 import NextButton from '../components/buttons/NextButton';
 import PrevButton from '../components/buttons/PrevButton'
@@ -28,7 +27,9 @@ const App = () => {
     <View style = {styles.container}>
       <WebView
         style = {styles.webview}
-        source={html}
+        allowFileAccess={true}
+        originWhitelist={['*']}
+        source={{html: require('../../assets/index')()}}
         ref = {webviewRef}
         onMessage={onMessage}
         javaScriptEnabled={true}
