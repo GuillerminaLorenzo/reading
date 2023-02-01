@@ -26,13 +26,14 @@ const PrevButton = ({webviewRef, currentHeading, pageHeading}) => {
   const scrollToHeadings = (heading) => {
     webviewRef.current.injectJavaScript(`
       window.scrollTo(0, ${heading});
-    `); 
+    `);
   };
 
   return (
     <TouchableOpacity
       style={styles.touchableOpacityRight}
       onPress={() => handlePrevPress()}
+      testID={'prev'} 
     >
       <Text style={styles.touchableOpacityText}>Prev</Text>
     </TouchableOpacity>
