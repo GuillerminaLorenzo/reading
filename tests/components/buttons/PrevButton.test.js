@@ -34,4 +34,16 @@ describe('PrevButton', () => {
     `);
     });
 
+    it('handles last prev button press correctly', () => {
+        const webviewRef = { current: { injectJavaScript: jest.fn() } };
+        const pageHeading = [{ top: 0 }, { top: 100 }, { top: 200 }];
+        const tree = render.create(
+          <PrevButton webviewRef={webviewRef} currentHeading={0} pageHeading={pageHeading} />
+        );
+        const button = tree.root.find(el => el.props.testID === 'prev');
+        button.props.onPress();
+        expect(webviewRef.current.injectJavaScript).toHaveBeenCalledWith(`
+      window.scrollTo(0, ${pageHeading[2].top});
+    `);
+    });
 });
