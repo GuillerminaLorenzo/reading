@@ -33,7 +33,7 @@ const PrevButton = ({webviewRef, currentHeading, pageHeading, setCurrentHeading}
       onPress={() => handlePrevPress()}
       testID={'prev'} 
     >
-      <Text style={styles.touchableOpacityText}>Prev</Text>
+      <Text style={styles.touchableOpacityText}>Previous</Text>
     </TouchableOpacity>
   );
 };
