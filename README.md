@@ -43,14 +43,15 @@ By default the app will run using the HTML content given in assets/index.js. If 
 ### Changing source in WebView 
 Before changing it, please check that the link you are trying to use has heading tags in its HTML, such as h1, h2, etc. Here is an example: `https://reactnative.dev/docs/getting-started`
 
-1. In App.js look for the `<WebView />` component.
-2. In its props look for `source` and delete the following: `{{html: require('../../assets/index')()}}`.
+1. In src/screens/App.js look for the `<WebView />` component (Line 28).
+2. In its props look for `source` and delete the following: `{{html: require('../../assets/index')()}}` (Line 32).
 3. You will end up with: `source=`.
 4. Copy and paste this: `{{ uri: }}` after step 3.
 5. You will end up with: `source={{ uri: }}`.
 6. This is where you are going to add your link, after step 4.
-7. You will end up with: `source={{ uri: YOUR_LINK }}`.
-8. Run `r` in the terminal where you are already running `Expo` to reload the app.
+7. You will end up with: `source={{ uri: 'YOUR_LINK' }}`.
+8. Save your code.
+9. Run `r` in the terminal where you are already running `Expo` to reload the app.
 
 
 # Testing
