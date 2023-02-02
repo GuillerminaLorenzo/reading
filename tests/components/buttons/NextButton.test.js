@@ -8,7 +8,8 @@ describe('NextButton', () => {
             <NextButton  
             webviewRef={"{'current': {'goBack': [Function goBack], 'goForward': [Function goForward], 'injectJavaScript': [Function injectJavaScript], 'postMessage': [Function postMessage], 'reload': [Function reload], 'requestFocus': [Function requestFocus], 'stopLoading': [Function stopLoading]}}"} 
             currentHeading={1}
-            pageHeading={'[{"top": 8}, {"top": 747}, {"top": 1516}, {"top": 2339}]'} />).toJSON();
+            pageHeading={'[{"top": 8}, {"top": 747}, {"top": 1516}, {"top": 2339}]'}
+            setCurrentHeading={jest.fn()} />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
@@ -17,7 +18,8 @@ describe('NextButton', () => {
             <NextButton  
             webviewRef={"{'current': {'goBack': [Function goBack], 'goForward': [Function goForward], 'injectJavaScript': [Function injectJavaScript], 'postMessage': [Function postMessage], 'reload': [Function reload], 'requestFocus': [Function requestFocus], 'stopLoading': [Function stopLoading]}}"} 
             currentHeading={1}
-            pageHeading={'[{"top": 8}, {"top": 747}, {"top": 1516}, {"top": 2339}]'} />).toJSON();
+            pageHeading={'[{"top": 8}, {"top": 747}, {"top": 1516}, {"top": 2339}]'} 
+            setCurrentHeading={jest.fn()} />).toJSON();
         expect(tree.children.length).toBe(1);
     });
 
@@ -25,7 +27,7 @@ describe('NextButton', () => {
         const webviewRef = { current: { injectJavaScript: jest.fn() } };
         const pageHeading = [{ top: 0 }, { top: 100 }, { top: 200 }];
         const tree = render.create(
-        <NextButton webviewRef={webviewRef} currentHeading={1} pageHeading={pageHeading} />
+        <NextButton webviewRef={webviewRef} currentHeading={1} pageHeading={pageHeading} setCurrentHeading={jest.fn()}/>
         );
         const button = tree.root.find(el => el.props.testID === 'next');
         button.props.onPress();
@@ -38,7 +40,7 @@ describe('NextButton', () => {
         const webviewRef = { current: { injectJavaScript: jest.fn() } };
         const pageHeading = [{ top: 0 }, { top: 100 }, { top: 200 }];
         const tree = render.create(
-          <NextButton webviewRef={webviewRef} currentHeading={2} pageHeading={pageHeading} />
+          <NextButton webviewRef={webviewRef} currentHeading={2} pageHeading={pageHeading} setCurrentHeading={jest.fn()}/>
         );
         const button = tree.root.find(el => el.props.testID === 'next');
         button.props.onPress();
