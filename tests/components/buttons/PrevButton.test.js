@@ -3,29 +3,23 @@ import render from 'react-test-renderer';
 import PrevButton from '../../../scr/components/buttons/PrevButton';
 
 describe('PrevButton', () => {
+  const pageHeading = [{ top: 0 }, { top: 100 }, { top: 200 }];
+  const webviewRef = { current: { injectJavaScript: jest.fn() } };
     it('should render successfully', () => {
         const tree = render.create(
-            <PrevButton  
-            webviewRef={"{'current': {'goBack': [Function goBack], 'goForward': [Function goForward], 'injectJavaScript': [Function injectJavaScript], 'postMessage': [Function postMessage], 'reload': [Function reload], 'requestFocus': [Function requestFocus], 'stopLoading': [Function stopLoading]}}"} 
-            currentHeading={1}
-            pageHeading={'[{"top": 8}, {"top": 747}, {"top": 1516}, {"top": 2339}]'}
-            setCurrentHeading={jest.fn()}/>).toJSON();
+        <PrevButton webviewRef={webviewRef} currentHeading={1} pageHeading={pageHeading} setCurrentHeading={jest.fn()} />
+        ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('has 1 child', () => {
         const tree = render.create(
-            <PrevButton  
-            webviewRef={"{'current': {'goBack': [Function goBack], 'goForward': [Function goForward], 'injectJavaScript': [Function injectJavaScript], 'postMessage': [Function postMessage], 'reload': [Function reload], 'requestFocus': [Function requestFocus], 'stopLoading': [Function stopLoading]}}"} 
-            currentHeading={1}
-            pageHeading={'[{"top": 8}, {"top": 747}, {"top": 1516}, {"top": 2339}]'} 
-            setCurrentHeading={jest.fn()}/>).toJSON();
+        <PrevButton webviewRef={webviewRef} currentHeading={1} pageHeading={pageHeading} setCurrentHeading={jest.fn()} />
+        ).toJSON();
         expect(tree.children.length).toBe(1);
     });
 
     it('handles prev button press correctly', () => {
-        const webviewRef = { current: { injectJavaScript: jest.fn() } };
-        const pageHeading = [{ top: 0 }, { top: 100 }, { top: 200 }];
         const tree = render.create(
         <PrevButton webviewRef={webviewRef} currentHeading={1} pageHeading={pageHeading} setCurrentHeading={jest.fn()} />
         );
@@ -37,8 +31,6 @@ describe('PrevButton', () => {
     });
 
     it('handles last prev button press correctly', () => {
-        const webviewRef = { current: { injectJavaScript: jest.fn() } };
-        const pageHeading = [{ top: 0 }, { top: 100 }, { top: 200 }];
         const tree = render.create(
           <PrevButton webviewRef={webviewRef} currentHeading={0} pageHeading={pageHeading} setCurrentHeading={jest.fn()} />
         );
