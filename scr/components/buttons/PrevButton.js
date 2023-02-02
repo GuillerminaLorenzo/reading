@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styles from "../style/Styles";
 
-const PrevButton = ({webviewRef, currentHeading, pageHeading}) => {
-  const [newCurrentHeading, setNewCurrentHeading] = useState(currentHeading);
-
+const PrevButton = ({webviewRef, currentHeading, pageHeading, setCurrentHeading}) => {
   const secondToLastHeading = pageHeading.length - 1;
-  const prevHeading = newCurrentHeading - 1;
+  const prevHeading = currentHeading - 1;
 
   const handlePrevPress = () => {
-    if (newCurrentHeading > 0) {
-      setNewCurrentHeading(prevHeading);
+    if (currentHeading > 0) {
+      setCurrentHeading(prevHeading);
       scrollToHeadings(pageHeading[prevHeading].top);
     }
     handlePrevPressLastHeading();
   };
 
   const handlePrevPressLastHeading = () => {
-    if (newCurrentHeading === 0){
-      setNewCurrentHeading(secondToLastHeading);
+    if (currentHeading === 0){
+      setCurrentHeading(secondToLastHeading);
       scrollToHeadings(pageHeading[secondToLastHeading].top);
     }
   };

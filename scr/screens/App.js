@@ -40,11 +40,13 @@ const App = () => {
         webviewRef={webviewRef} 
         currentHeading={currentHeading}
         pageHeading={pageHeading} 
+        setCurrentHeading={setCurrentHeading}
       />
       <NextButton 
         webviewRef={webviewRef} 
         currentHeading={currentHeading}
         pageHeading={pageHeading}
+        setCurrentHeading={setCurrentHeading}
       />
       </View>
     </View>
