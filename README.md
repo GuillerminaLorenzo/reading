@@ -41,10 +41,10 @@ If you have emulators installed, you can press `a` or `i` to run the app through
 By default the app will run using the HTML content given in assets/index.js. If you would like to use a different source, here is a guide that you will need to follow:
 
 ### Changing source in WebView 
-Before changing it, please check hat the link you are trying to use has heading tags in it's HTML, such as h1, h2, etc. Here is an example: `https://reactnative.dev/docs/getting-started`
+Before changing it, please check that the link you are trying to use has heading tags in its HTML, such as h1, h2, etc. Here is an example: `https://reactnative.dev/docs/getting-started`
 
 1. In App.js look for the `<WebView />` component.
-2. In it's props look for `source` and delete the following: `{{html: require('../../assets/index')()}}`.
+2. In its props look for `source` and delete the following: `{{html: require('../../assets/index')()}}`.
 3. You will end up with: `source=`.
 4. Copy and paste this: `{{ uri: }}` after step 3.
 5. You will end up with: `source={{ uri: }}`.
