@@ -1,5 +1,5 @@
 import React from 'react';
-import render from 'react-test-renderer';
+import render, {act} from 'react-test-renderer';
 import App from '../../scr/screens/App';
 
 
@@ -28,7 +28,9 @@ describe('App', () => {
         const component = render.create(<App pageHeading={[{"top":0},{"top":100},{"top":200}]}/>);
         const instance = component.root;
         const webview = component.toJSON().children[0].children[0];
-        webview.props.onMessage({ nativeEvent: { data: '[{"top":0},{"top":100},{"top":200}]' } });
+        act(() => {
+            webview.props.onMessage({ nativeEvent: { data: '[{"top":0},{"top":100},{"top":200}]' } });
+        });
         expect(instance.props.pageHeading).toEqual([{"top":0},{"top":100},{"top":200}]); 
     });
 });
