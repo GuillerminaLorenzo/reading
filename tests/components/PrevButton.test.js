@@ -1,6 +1,6 @@
 import React from 'react';
 import render from 'react-test-renderer';
-import PrevButton from '../../../scr/components/buttons/PrevButton';
+import PrevButton from '../../scr/components/buttons/PrevButton';
 
 describe('PrevButton', () => {
   const pageHeading = [{ top: 0 }, { top: 100 }, { top: 200 }];
