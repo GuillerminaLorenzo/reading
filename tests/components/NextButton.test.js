@@ -1,6 +1,6 @@
 import React from 'react';
 import render from 'react-test-renderer';
-import NextButton from '../../scr/components/buttons/NextButton';
+import NextButton from '../../components/buttons/NextButton';
 
 describe('NextButton', () => {
   const pageHeading = [{ top: 0 }, { top: 100 }, { top: 200 }];
