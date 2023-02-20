@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import styles from "../components/style/Styles";
-import NextButton from '../components/buttons/NextButton';
-import PrevButton from '../components/buttons/PrevButton'
+import styles from "./components/style/Styles";
+import NextButton from './components/buttons/NextButton';
+import PrevButton from './components/buttons/PrevButton'
 
 const App = () => {
 
@@ -29,7 +29,7 @@ const App = () => {
         style = {styles.webview}
         allowFileAccess={true}
         originWhitelist={['*']}
-        source={{html: require('../../assets/index')()}}
+        source={{html: require('./assets/index')()}}
         ref = {webviewRef}
         onMessage={onMessage}
         javaScriptEnabled={true}
