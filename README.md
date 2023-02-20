@@ -1,4 +1,4 @@
-# Perlego Mobile Developer Assessment
+# Reading
 
 # Task
 For the challenge, we would like you render some HTML content inside a WebView in React Native.
