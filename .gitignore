@@ -15,3 +15,4 @@ tests/screens/__snapshots__
 
 # macOS
 .DS_Store
+.idea
